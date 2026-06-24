@@ -1,0 +1,48 @@
+Apellido y nombre de los alumnos que participaron de la interacción:
+[ALFA - Romero Matheo]
+[BETA - Zepesky Fabrizio]
+
+
+A- ¿Qué color de fondo tiene su página en el TESTING?
+	Quedo en color BLUE
+
+B- ¿Qué color de fondo tiene su página en el DESARROLLO?
+	Quedo en color RED
+
+C- ¿Qué color de fondo tiene su página en el MASTER?
+	Quedo en color YELLOW
+
+D- ¿Qué favicon quedó en el MASTER el de ALFA o el de BETA?
+	Quedo con el favicon de BETA
+
+E- ¿Algún integrante tuvo problemas al hacer el push?
+	Sí. BETA tuvo problemas al hacer push en TESTING
+
+F- ¿Qué problemas surgieron?
+	Git rechazó el push porque el repositorio remoto tenía commits que el 
+	repositorio local no tenía (el push de ALFA, y luego el de BETA, ya habían 
+	modificado el remoto antes de que los demás pudieran subir el suyo).
+
+G- ¿Qué soluciones pueden aplicar y cuál sería la consecuencia de cada solución adoptada?
+	- Hacer "git pull" antes del push: trae los cambios remotos y los combina 
+	con los propios (puede generar un merge commit o un conflicto a resolver). 
+  	Consecuencia: se conservan los cambios de todos.
+	- Hacer "git pull --rebase": reordena los commits propios encima de los 
+  	remotos, manteniendo un historial más lineal. Consecuencia: se conservan 
+  	los cambios de todos, pero sin un commit de merge.
+	- Hacer "git push -f": sobreescribe el remoto con la versión local. 
+  	Consecuencia: se pierden los cambios de los demás (ver pregunta H).
+
+	H- ¿Qué sucede si cada uno utiliza el push -f?
+	Cada push -f sobreescribe por completo el historial remoto con la versión 
+	local de quien lo ejecuta, eliminando los commits de los compañeros que 
+	hayan pusheado antes. Se pierde el trabajo de los demás integrantes.
+
+I- ¿Qué debo hacer para que el index.html tenga todos los <p> de los puntos 
+18, 19 y 20 en DESARROLLO?
+	Una vez resueltos los conflictos en TESTING (de modo que los tres <p> 
+	convivan en el archivo), hay que hacer el merge de TESTING a DESARROLLO:
+   		git checkout DESARROLLO
+   		git pull origin DESARROLLO
+   		git merge TESTING
+   		git push origin DESARROLLO
